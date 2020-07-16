@@ -50,7 +50,7 @@ TEST:
   IMS_PER_BATCH: 2
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change
   MERGE_RESULTS: true
-  MERGE_GT_FILE: '/nfs/work/ws/TinyBenchmark/dataset/tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_test_sw640_sh512_all.json'
+  MERGE_GT_FILE: '/nfs/work/ws/TinyBenchmark/dataset/tiny_set/erase_with_uncertain_dataset/annotations/tiny_set_test_yesbox.json'
   IGNORE_UNCERTAIN: true
   USE_IOD_FOR_IGNORE: true
 #  DEBUG:

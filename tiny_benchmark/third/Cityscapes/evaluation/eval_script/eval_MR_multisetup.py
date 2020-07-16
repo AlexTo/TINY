@@ -108,6 +108,8 @@ class COCOeval:
         for gt in gts:
             gt['ignore'] = gt['ignore'] if 'ignore' in gt else 0
             # ########################################################### change by hui ###############################
+            bb = gt['bbox']
+            gt['area'] = gt.get('area', bb[2] * bb[3])
             import math
             if 'vis_ratio' not in gt:
                 if 'vis' not in gt:
@@ -609,7 +611,7 @@ class Params:
         self.imgIds = []
         self.catIds = []
 
-        self.recThrs = np.linspace(.0, 1.00, np.round((1.00 - .0) / .01) + 1, endpoint=True)
+        self.recThrs = np.linspace(.0, 1.00, int(np.round((1.00 - .0) / .01)) + 1, endpoint=True)
         # ##########################3 add by hui /8 for 4*2 cut_image make a merged image #######################
         # np.array([0.0100, 0.0178, 0.0316, 0.0562, 0.1000, 0.1778, 0.3162, 0.5623, 1.0000])
         # self.fppiThrs = get_fppi(0.01, 8., 9) / Params.CUT_WH[0] / Params.CUT_WH[1]
@@ -621,7 +623,7 @@ class Params:
         self.useCats = 1
 
         if Params.CITYPERSON_STANDARD:
-            self.iouThrs = np.array([0.5, 0.75])  if Params.IOU_THS is None else np.array(Params.IOU_THS) # np.linspace(.5, 0.95, np.round((0.95 - .5) / .05) + 1, endpoint=True)
+            self.iouThrs = np.array([0.5, 0.75])  if Params.IOU_THS is None else np.array(Params.IOU_THS) # np.linspace(.5, 0.95, int(np.round((0.95 - .5) / .05)) + 1, endpoint=True)
 
             self.HtRng = [[50, 1e5 ** 2], [50,75], [50, 1e5 ** 2], [20, 1e5 ** 2], [20, 50]]
             self.VisRng = [[0.65, 1e5 ** 2], [0.65, 1e5 ** 2], [0.2,0.65], [0.2, 1e5 ** 2], [0.65, 1e5 ** 2]]
