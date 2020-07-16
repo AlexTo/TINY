@@ -44,8 +44,8 @@ SOLVER:
   WEIGHT_DECAY: 0.0001
   STEPS: (9618, 16030)   # (6 epoch, 10 epoch)  19236, 25648
   MAX_ITER: 19236 # 12 epoch
-  IMS_PER_BATCH: 20
-  NUM_GPU: 1
+  IMS_PER_BATCH: 32
+  NUM_GPU: 2
 TEST:
   IMS_PER_BATCH: 2
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change

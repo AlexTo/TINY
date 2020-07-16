@@ -22,3 +22,5 @@ tiny_benchmark/sds/log2/
 # tiny_benchmark/sds/standard_gaussian_100w_sample.npy
 # tiny_benchmark/tiny_benchmark/MyPackage/notebook/
 # tiny_benchmark/demo/
+.idea
+models

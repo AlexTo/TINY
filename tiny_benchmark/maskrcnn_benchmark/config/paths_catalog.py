@@ -5,7 +5,7 @@ import os
 
 
 class DatasetCatalog(object):
-    DATA_DIR = "/nfs/work/ws/TinyBenchmark/dataset"
+    DATA_DIR = "../dataset/"
     DATASETS = {
         "coco_2017_merge": {
             "img_dir": "coco/images",
@@ -43,11 +43,11 @@ class DatasetCatalog(object):
             "img_dir": "coco/",
             "ann_file": "coco/annotations/instances_simple_merge2014_clipAspectCity.json"
         },
-        "coco_2014_merge_sample4":{
+        "coco_2014_merge_sample4": {
             "img_dir": "coco/",
             "ann_file": "coco/annotations/instances_simple_merge2014_sample4.json"
         },
-        "coco_2014_apect2.44_merge":{
+        "coco_2014_apect2.44_merge": {
             "img_dir": "coco/",
             "ann_file": "coco/annotations/instances_merge2014_aspect2.44.json"
         },
@@ -65,7 +65,8 @@ class DatasetCatalog(object):
         },
         "coco_2014_minival_resize": {  # can not use as train
             "img_dir": "coco/val2014",
-            "ann_file": "coco/annotations/instances_minival2014_resize.json"  # only area resized to eval (FCOS train use area)
+            "ann_file": "coco/annotations/instances_minival2014_resize.json"
+            # only area resized to eval (FCOS train use area)
         },
         "coco_2014_valminusminival": {
             "img_dir": "coco/val2014",
@@ -199,22 +200,28 @@ class DatasetCatalog(object):
             'img_dir': 'tiny_set/erase_with_uncertain_dataset/train',
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all.json'
         },
-            # origin image
+        # tinyperson
+        "tiny_set_corner_sw640_sh512_erase_with_uncertain_test_all_coco": {
+            'img_dir': 'tiny_set/erase_with_uncertain_dataset/test',
+            'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/tiny_set_test_yesbox_sw640_sh512.json'
+        },
+
+        # origin image
         "tiny_set_corner_sw640_sh512_train_all_coco": {
             'img_dir': 'tiny_set/train',
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all.json'
         },
-            # big cut
+        # big cut
         "tiny_set_corner_sw1920_sh1080_erase_with_uncertain_train_all_coco": {
             'img_dir': 'tiny_set/erase_with_uncertain_dataset/train',
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw1920_sh1080_all.json'
         },
-            # origin image + big cut
+        # origin image + big cut
         "tiny_set_corner_sw1920_sh1080_train_all_coco": {
             'img_dir': 'tiny_set/train',
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw1920_sh1080_all.json'
         },
-            # big cut
+        # big cut
         "tiny_set_corner_sw1920_sh1080_test_all_coco": {
             'img_dir': 'tiny_set/test',
             'ann_file': 'tiny_set/annotations/corner/task/tiny_set_test_sw1920_sh1080_all.json'
@@ -223,33 +230,33 @@ class DatasetCatalog(object):
             'img_dir': 'tiny_set/test',
             'ann_file': 'tiny_set/annotations/corner/task/tiny_set_test_sw640_sh512_all.json'
         },
-        
+
         # sayna
-        "sanya_all_rgb_train_pw4_ph2_cocostyle":{
+        "sanya_all_rgb_train_pw4_ph2_cocostyle": {
             "img_dir": "sanya/cocostyle_release/all/rgb/images",
             "ann_file": "sanya/cocostyle_release/all/rgb/corner_annotations/tiny_all_rgb_train_coco_pw4_ph2.json"
         },
-        "sanya_all_rgb_test_pw4_ph2_cocostyle":{
+        "sanya_all_rgb_test_pw4_ph2_cocostyle": {
             "img_dir": "sanya/cocostyle_release/all/rgb/images",
             "ann_file": "sanya/cocostyle_release/all/rgb/corner_annotations/tiny_all_rgb_test_coco_pw4_ph2.json"
         },
-        "sanya_all_rgb_minus17test_pw4_ph2_cocostyle":{
+        "sanya_all_rgb_minus17test_pw4_ph2_cocostyle": {
             "img_dir": "sanya/cocostyle_release/all/rgb/images",
             "ann_file": "sanya/cocostyle_release/all/rgb/corner_annotations/tiny_all_rgb_minus17test_coco_pw4_ph2.json"
         },
-        "sanya_all_rgb_minus17test_cocostyle":{
+        "sanya_all_rgb_minus17test_cocostyle": {
             "img_dir": "sanya/cocostyle_release/all/rgb/images",
             "ann_file": "sanya/cocostyle_release/all/rgb/annotations/tiny_all_rgb_minus17test_coco.json"
         },
-        "sanya17test_cocostyle":{
+        "sanya17test_cocostyle": {
             "img_dir": "sanya17test/img",
             "ann_file": "sanya17test/annotation_cocostyle.json"
         },
-        "sanya17test_corner_cocostyle":{
+        "sanya17test_corner_cocostyle": {
             "img_dir": "sanya17test/img",
             "ann_file": "sanya17test/annotation_cocostyle_pw4_ph2.json"
         },
-        "sanya17test_voc":{
+        "sanya17test_voc": {
             "data_dir": "sanya17test/voc_annos",
             "split": "test",
             'ann_file': "sanya17test/Annotations"
