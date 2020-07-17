@@ -194,11 +194,15 @@ class DatasetCatalog(object):
             "img_dir": "cityscapes/tiny/leftImg8bit_trainvaltest/leftImg8bit/val",
             "ann_file": "cityscapes/tiny/perdestrian_annotations/citypersons_all_val.json"
         },
-
         # tinyperson
         "tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco": {
             'img_dir': 'tiny_set/erase_with_uncertain_dataset/train',
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all.json'
+        },
+        # tinyperson
+        "tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco_only_tiny1": {
+            'img_dir': 'tiny_set/erase_with_uncertain_dataset/train',
+            'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all_only_tiny1.json'
         },
         # tinyperson
         "tiny_set_corner_sw640_sh512_erase_with_uncertain_test_all_coco": {

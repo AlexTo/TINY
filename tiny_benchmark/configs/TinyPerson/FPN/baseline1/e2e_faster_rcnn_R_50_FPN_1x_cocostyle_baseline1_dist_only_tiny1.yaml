@@ -31,7 +31,7 @@ INPUT:
   USE_SCALE: true
   SCALES: (1,)
 DATASETS:
-  TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco",)
+  TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco_only_tiny1",)
   TEST: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_test_all_coco",)
 DATALOADER:
   SIZE_DIVISIBILITY: 32
@@ -45,7 +45,7 @@ SOLVER:
   STEPS: (9618, 16030)   # (6 epoch, 10 epoch)  19236, 25648
   MAX_ITER: 19236 # 12 epoch
   IMS_PER_BATCH: 2
-  NUM_GPU: 1
+  NUM_GPU: 2
 TEST:
   IMS_PER_BATCH: 2
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change
