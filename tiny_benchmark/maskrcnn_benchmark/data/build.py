@@ -198,7 +198,7 @@ def make_data_loader(cfg, is_train=True, is_distributed=False, start_iter=0,
             num_workers=num_workers,
             batch_sampler=batch_sampler,
             collate_fn=collator,
-            timeout=30,                                # add by hui for big batch
+            timeout=0,                                # add by hui for big batch
         )
         data_loaders.append(data_loader)
     if is_train:

@@ -1,11 +1,11 @@
 MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
-  #WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
-  WEIGHT: '../models/model_only_e2e_faster_rcnn_R_50_FPN_1x.pth'
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
+  #WEIGHT: '../models/model_only_e2e_faster_rcnn_R_50_FPN_1x.pth'
   BACKBONE:
     CONV_BODY: "R-50-FPN"
-#    RESNET_STAGE_FIRST_STRIDE: (1, 2, 2, 2)
-#    REMOVE_STEM_POOL: true
+  #    RESNET_STAGE_FIRST_STRIDE: (1, 2, 2, 2)
+  #    REMOVE_STEM_POOL: true
   RESNETS:
     BACKBONE_OUT_CHANNELS: 256
   RPN:
