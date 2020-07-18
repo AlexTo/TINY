@@ -200,9 +200,14 @@ class DatasetCatalog(object):
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all.json'
         },
         # tinyperson
-        "tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco_only_tiny1": {
+        "tiny_set_corner_sw640_sh512_erase_with_uncertain_train_only_tiny1_coco": {
             'img_dir': 'tiny_set/erase_with_uncertain_dataset/train',
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all_only_tiny1.json'
+        },
+        # tinyperson
+        "tiny_set_corner_sw640_sh512_erase_with_uncertain_train_ignore_others_coco": {
+            'img_dir': 'tiny_set/erase_with_uncertain_dataset/train',
+            'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_ignore_others.json'
         },
         # tinyperson
         "tiny_set_corner_sw640_sh512_erase_with_uncertain_test_all_coco": {

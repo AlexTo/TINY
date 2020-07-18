@@ -24,3 +24,5 @@ tiny_benchmark/sds/log2/
 # tiny_benchmark/demo/
 .idea
 models
+results.txt
+ignore_*

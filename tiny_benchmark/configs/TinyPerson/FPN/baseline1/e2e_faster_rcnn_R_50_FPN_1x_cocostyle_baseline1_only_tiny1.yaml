@@ -32,7 +32,7 @@ INPUT:
   SCALES: (1,)
 DATASETS:
   TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco_only_tiny1",)
-  TEST: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_test_all_coco",)
+  TEST: ("tiny_set_corner_sw640_sh512_test_all_coco",)
 DATALOADER:
   SIZE_DIVISIBILITY: 32
 
@@ -50,7 +50,7 @@ TEST:
   IMS_PER_BATCH: 2
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change
   MERGE_RESULTS: true
-  MERGE_GT_FILE: '../dataset/tiny_set/erase_with_uncertain_dataset/annotations/tiny_set_test_yesbox.json'
+  MERGE_GT_FILE: '../dataset/tiny_set/erase_with_uncertain_dataset/annotations/tiny_set_test_yesbox_sw640_sh512.json'
   IGNORE_UNCERTAIN: true
   USE_IOD_FOR_IGNORE: true
 #  DEBUG:

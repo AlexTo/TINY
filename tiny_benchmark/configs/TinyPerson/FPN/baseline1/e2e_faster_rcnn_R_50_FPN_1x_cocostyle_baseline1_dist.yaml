@@ -32,7 +32,7 @@ INPUT:
   SCALES: (1,)
 DATASETS:
   TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco",)
-  TEST: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_test_all_coco",)
+  TEST: ("tiny_set_corner_sw640_sh512_test_all_coco",)
 DATALOADER:
   SIZE_DIVISIBILITY: 32
 

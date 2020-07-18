@@ -4,8 +4,8 @@ MODEL:
   #WEIGHT: '../models/model_only_e2e_faster_rcnn_R_50_FPN_1x.pth'
   BACKBONE:
     CONV_BODY: "R-50-FPN"
-  #    RESNET_STAGE_FIRST_STRIDE: (1, 2, 2, 2)
-  #    REMOVE_STEM_POOL: true
+#    RESNET_STAGE_FIRST_STRIDE: (1, 2, 2, 2)
+#    REMOVE_STEM_POOL: true
   RESNETS:
     BACKBONE_OUT_CHANNELS: 256
   RPN:
@@ -31,7 +31,7 @@ INPUT:
   USE_SCALE: true
   SCALES: (1,)
 DATASETS:
-  TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco_only_tiny1",)
+  TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_ignore_others_coco",)
   TEST: ("tiny_set_corner_sw640_sh512_test_all_coco",)
 DATALOADER:
   SIZE_DIVISIBILITY: 32
@@ -45,7 +45,7 @@ SOLVER:
   STEPS: (9618, 16030)   # (6 epoch, 10 epoch)  19236, 25648
   MAX_ITER: 19236 # 12 epoch
   IMS_PER_BATCH: 2
-  NUM_GPU: 2
+  NUM_GPU: 1
 TEST:
   IMS_PER_BATCH: 2
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change
