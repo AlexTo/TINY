@@ -6,6 +6,9 @@
 #include <THC/THCAtomics.cuh>
 #include <THC/THCDeviceUtils.cuh>
 
+long ceil_div2(long a, long b) { 
+  return (a + b - 1) / b; 
+}
 
 // TODO make it in a common file
 #define CUDA_1D_KERNEL_LOOP(i, n)                            \
@@ -126,7 +129,7 @@ std::tuple<at::Tensor, at::Tensor> ROIPool_forward_cuda(const at::Tensor& input,
 
   cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 
-  dim3 grid(std::min(THCCeilDiv((long)output_size, 512L), 4096L));
+  dim3 grid(std::min(ceil_div2((long)output_size, 512L), 4096L));
   dim3 block(512);
 
   if (output.numel() == 0) {
@@ -173,7 +176,7 @@ at::Tensor ROIPool_backward_cuda(const at::Tensor& grad,
 
   cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 
-  dim3 grid(std::min(THCCeilDiv((long)grad.numel(), 512L), 4096L));
+  dim3 grid(std::min(ceil_div2((long)grad.numel(), 512L), 4096L));
   dim3 block(512);
 
   // handle possibly empty gradients
