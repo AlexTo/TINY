@@ -6,7 +6,6 @@ from torch.autograd.function import once_differentiable
 from torch.nn.modules.utils import _pair
 
 from maskrcnn_benchmark import _C
-from apex import amp
 
 
 class _ROIPool(Function):
@@ -53,7 +52,6 @@ class ROIPool(nn.Module):
         self.output_size = output_size
         self.spatial_scale = spatial_scale
 
-    @amp.float_function
     def forward(self, input, rois):
         return roi_pool(input, rois, self.output_size, self.spatial_scale)
 

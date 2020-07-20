@@ -4,7 +4,6 @@ Basic training script for PyTorch
 """
 
 import warnings
-
 warnings.filterwarnings("ignore", category=UserWarning)
 
 # Set up custom environment before nearly anything else is imported
@@ -30,14 +29,13 @@ from maskrcnn_benchmark.utils.imports import import_file
 from maskrcnn_benchmark.utils.logger import setup_logger
 from maskrcnn_benchmark.utils.miscellaneous import mkdir
 from maskrcnn_benchmark.config.paths_catalog import DatasetCatalog
-from apex import amp
 
 
 def fixed_seed(init_seed):  # add by hui
     import numpy as np
     import random
     if init_seed == -2:
-        init_seed = np.random.randint(0, 2 ** 32)
+        init_seed = np.random.randint(0, 2**32)
     print("set random seed to {}.".format(init_seed))
     random.seed(init_seed)
     torch.manual_seed(init_seed)
@@ -62,11 +60,6 @@ def train(cfg, local_rank, distributed):
 
     optimizer = make_optimizer(cfg, model)
     scheduler = make_lr_scheduler(cfg, optimizer)
-
-    # Initialize mixed-precision training
-    use_mixed_precision = cfg.DTYPE == "float16"
-    amp_opt_level = 'O1' if use_mixed_precision else 'O0'
-    model, optimizer = amp.initialize(model, optimizer, opt_level=amp_opt_level)
 
     if distributed:
         model = torch.nn.parallel.DistributedDataParallel(
@@ -142,8 +135,7 @@ def run_test(cfg, model, distributed):
             data_loader_val,
             dataset_name=dataset_name,
             iou_types=iou_types,
-            box_only=False if cfg.MODEL.FCOS_ON or cfg.MODEL.RETINANET_ON or cfg.MODEL.GAU_ON else cfg.MODEL.RPN_ONLY,
-            # changed for fcos
+            box_only=False if cfg.MODEL.FCOS_ON or cfg.MODEL.RETINANET_ON or cfg.MODEL.GAU_ON else cfg.MODEL.RPN_ONLY,  # changed for fcos
             device=cfg.MODEL.DEVICE,
             expected_results=cfg.TEST.EXPECTED_RESULTS,
             expected_results_sigma_tol=cfg.TEST.EXPECTED_RESULTS_SIGMA_TOL,
@@ -160,7 +152,6 @@ def run_test(cfg, model, distributed):
         )
         synchronize()
 
-
 # ################################################ add by hui #################################################
 
 
@@ -169,7 +160,6 @@ def adaptive_config_change(name, old, new):
         return
     print('    {:<20} {} --> {}'.format(name, old, new))
     cfg.merge_from_list([name, new])
-
 
 # #################################################################################################
 
@@ -250,18 +240,15 @@ def main():
     if not args.skip_test:
         run_test(cfg, model, args.distributed)
 
-
 # ################################################ add by hui #################################################
 
 
 def some_pre_deal():
     """add by hui"""
-    from PIL import ImageFile  # add by hui
-    ImageFile.LOAD_TRUNCATED_IMAGES = True  # add by hui
-    assert cfg.SOLVER.NUM_GPU == torch.cuda.device_count(), 'NUM_GPU is not equal to visible GPU count {} vs {}.' \
+    from PIL import ImageFile    # add by hui
+    ImageFile.LOAD_TRUNCATED_IMAGES = True   # add by hui
+    assert cfg.SOLVER.NUM_GPU == torch.cuda.device_count(), 'NUM_GPU is not equal to visible GPU count {} vs {}.'\
         .format(cfg.SOLVER.NUM_GPU, torch.cuda.device_count())
-
-
 ##################################################################################################
 
 
