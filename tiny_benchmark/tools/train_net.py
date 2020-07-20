@@ -24,6 +24,7 @@ from maskrcnn_benchmark.utils.comm import synchronize, get_rank
 from maskrcnn_benchmark.utils.imports import import_file
 from maskrcnn_benchmark.utils.logger import setup_logger
 from maskrcnn_benchmark.utils.miscellaneous import mkdir
+from apex import amp
 
 
 def train(cfg, local_rank, distributed):
@@ -33,6 +34,11 @@ def train(cfg, local_rank, distributed):
 
     optimizer = make_optimizer(cfg, model)
     scheduler = make_lr_scheduler(cfg, optimizer)
+
+    # Initialize mixed-precision training
+    use_mixed_precision = cfg.DTYPE == "float16"
+    amp_opt_level = 'O1' if use_mixed_precision else 'O0'
+    model, optimizer = amp.initialize(model, optimizer, opt_level=amp_opt_level)
 
     if distributed:
         model = torch.nn.parallel.DistributedDataParallel(
