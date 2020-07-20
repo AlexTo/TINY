@@ -38,16 +38,16 @@ DATALOADER:
 
 # 2 gpus, base 4
 SOLVER:
-  CHECKPOINT_PERIOD: 3206   # 2 epoch
-  TEST_ITER: 1603   # 1 epoch
+  CHECKPOINT_PERIOD: 1603   # 2 epoch
+  TEST_ITER: 19236   # 1 epoch
   BASE_LR: 0.01
   WEIGHT_DECAY: 0.0001
   STEPS: (9618, 16030)   # (6 epoch, 10 epoch)  19236, 25648
   MAX_ITER: 19236 # 12 epoch
-  IMS_PER_BATCH: 2
+  IMS_PER_BATCH: 4
   NUM_GPU: 4
 TEST:
-  IMS_PER_BATCH: 2
+  IMS_PER_BATCH: 4
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change
   MERGE_RESULTS: true
   MERGE_GT_FILE: '../dataset/visdrone/annotations/visdrone_test_sw640_sh512.json'
