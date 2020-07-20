@@ -244,6 +244,18 @@ class DatasetCatalog(object):
             'ann_file': 'tiny_set/annotations/corner/task/tiny_set_test_sw640_sh512_all.json'
         },
 
+        # visdrone
+        "vis_drone_corner_sw640_sh512_train_coco": {
+            'img_dir': 'visdrone/images/train',
+            'ann_file': 'visdrone/annotations/visdrone_train_sw640_sh512.json'
+        },
+
+        # visdrone
+        "vis_drone_corner_sw640_sh512_test_coco": {
+            'img_dir': 'visdrone/images/test',
+            'ann_file': 'visdrone/annotations/visdrone_test_sw640_sh512.json'
+        },
+
         # sayna
         "sanya_all_rgb_train_pw4_ph2_cocostyle": {
             "img_dir": "sanya/cocostyle_release/all/rgb/images",
