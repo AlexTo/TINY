@@ -71,6 +71,13 @@ def new_ann(x, y, w, h, img_id):
     }
 
 
+# Find the area to place "person" based on the current corner values and existing annotations of the image
+def find_area(corner, tiny_persons, new_person):
+    x = np.random.randint(0, corner[2] - corner[0] - new_person.width)
+    y = np.random.randint(0, corner[3] - corner[1] - new_person.height)
+    return x, y
+
+
 def place_random(orig_img, file_name, corner, tiny_persons, existing_anns, max_objs=20):
     if os.path.exists(f"{data_dir}/train_augmented/{file_name}"):
         orig_img = Image.open(f"{data_dir}/train_augmented/{file_name}").convert('RGB')
@@ -85,8 +92,7 @@ def place_random(orig_img, file_name, corner, tiny_persons, existing_anns, max_o
     patches = np.random.choice(list(range(len(tiny_persons))), num_to_put, replace=True)
     for p in patches:
         person = tiny_persons[p]
-        x = np.random.randint(0, corner[2] - person.width)
-        y = np.random.randint(0, corner[3] - person.height)
+        x, y = find_area(corner, tiny_persons, person)
         ann = new_ann(x, y, person.width, person.height, img_id)
         anns.append(ann)
         orig_img.paste(person, (x + corner[0], y + corner[1]))

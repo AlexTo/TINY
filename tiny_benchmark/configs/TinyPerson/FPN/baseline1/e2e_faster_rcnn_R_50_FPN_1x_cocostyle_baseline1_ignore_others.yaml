@@ -1,13 +1,18 @@
 MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
-  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
-  #WEIGHT: '../models/model_only_e2e_faster_rcnn_R_50_FPN_1x.pth'
+  WEIGHT: "catalog://ImageNetPretrained/FAIR/20171220/X-101-32x8d"
+#  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
+#  WEIGHT: '/home/hui/params/pretrained_model/maskrcnn_benchmark/clear_key_model_only_e2e_faster_rcnn_R_50_FPN_1x_tiny200.pth'
   BACKBONE:
-    CONV_BODY: "R-50-FPN"
+    CONV_BODY: "R-101-FPN"
+#    CONV_BODY: "R-50-FPN"
 #    RESNET_STAGE_FIRST_STRIDE: (1, 2, 2, 2)
 #    REMOVE_STEM_POOL: true
   RESNETS:
     BACKBONE_OUT_CHANNELS: 256
+    STRIDE_IN_1X1: False
+    NUM_GROUPS: 32
+    WIDTH_PER_GROUP: 8
   RPN:
     USE_FPN: True
     ANCHOR_STRIDE: (4, 8, 16, 32, 64)
@@ -26,28 +31,28 @@ MODEL:
     POOLER_SAMPLING_RATIO: 2
     FEATURE_EXTRACTOR: "FPN2MLPFeatureExtractor"
     PREDICTOR: "FPNPredictor"
-    NUM_CLASSES: 2                                                   # not forget
+    NUM_CLASSES: 2                                                    # not forget
 INPUT:
   USE_SCALE: true
-  SCALES: (1,)
+  SCALES: (1, 2.5)
 DATASETS:
-  TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_ignore_others_coco",)
+  TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco_ignore_others",)
   TEST: ("tiny_set_corner_sw640_sh512_test_all_coco",)
 DATALOADER:
   SIZE_DIVISIBILITY: 32
 
 # 2 gpus, base 4
 SOLVER:
-  CHECKPOINT_PERIOD: 3206   # 2 epoch
-  TEST_ITER: 1603   # 1 epoch
+  CHECKPOINT_PERIOD: 1603   # 2 epoch
+  TEST_ITER: 19236 # 1603   # 1 epoch
   BASE_LR: 0.01
   WEIGHT_DECAY: 0.0001
   STEPS: (9618, 16030)   # (6 epoch, 10 epoch)  19236, 25648
   MAX_ITER: 19236 # 12 epoch
-  IMS_PER_BATCH: 2
-  NUM_GPU: 1
+  IMS_PER_BATCH: 4
+  NUM_GPU: 4
 TEST:
-  IMS_PER_BATCH: 2
+  IMS_PER_BATCH: 4
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change
   MERGE_RESULTS: true
   MERGE_GT_FILE: '../dataset/tiny_set/erase_with_uncertain_dataset/annotations/tiny_set_test_yesbox.json'
@@ -55,4 +60,4 @@ TEST:
   USE_IOD_FOR_IGNORE: true
 #  DEBUG:
 #    USE_LAST_PREDICTION: True
-OUTPUT_DIR: ./outputs/tiny_set/FPN/baseline1
+OUTPUT_DIR: ./outputs/tiny_set/FPN/X101_IO
