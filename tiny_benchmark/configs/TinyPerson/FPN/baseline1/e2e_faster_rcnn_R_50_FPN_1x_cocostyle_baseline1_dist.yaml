@@ -38,8 +38,8 @@ DATALOADER:
 
 # 2 gpus, base 4
 SOLVER:
-  CHECKPOINT_PERIOD: 3206   # 2 epoch
-  TEST_ITER: 1603   # 1 epoch
+  CHECKPOINT_PERIOD: 9618   # 6 epoch
+  TEST_ITER: 19236   # 12 epoch
   BASE_LR: 0.01
   WEIGHT_DECAY: 0.0001
   STEPS: (9618, 16030)   # (6 epoch, 10 epoch)  19236, 25648
