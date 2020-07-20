@@ -9,6 +9,7 @@ import torch.distributed as dist
 from maskrcnn_benchmark.utils.comm import get_world_size
 from maskrcnn_benchmark.utils.metric_logger import MetricLogger
 from math import inf
+from apex import amp
 
 
 def reduce_loss_dict(loss_dict):
@@ -37,17 +38,17 @@ def reduce_loss_dict(loss_dict):
 
 
 def do_train(
-    model,
-    data_loader,
-    optimizer,
-    scheduler,
-    checkpointer,
-    device,
-    checkpoint_period,
-    arguments,
-    test_func,      # add by hui
-    cfg,            # add by hui
-    distributed     # add by hui
+        model,
+        data_loader,
+        optimizer,
+        scheduler,
+        checkpointer,
+        device,
+        checkpoint_period,
+        arguments,
+        test_func,  # add by hui
+        cfg,  # add by hui
+        distributed  # add by hui
 ):
     logger = logging.getLogger("maskrcnn_benchmark.trainer")
     logger.info("Start training")
@@ -77,7 +78,11 @@ def do_train(
         meters.update(loss=losses_reduced, **loss_dict_reduced)
 
         optimizer.zero_grad()
-        losses.backward()
+        # Note: If mixed precision is not used, this ends up doing nothing
+        # Otherwise apply loss scaling for mixed-precision recipe
+        with amp.scale_loss(losses, optimizer) as scaled_losses:
+            scaled_losses.backward()
+
         optimizer.step()
 
         batch_time = time.time() - end
@@ -111,7 +116,7 @@ def do_train(
             checkpointer.save("model_final", **arguments)
         # ################################################## add by hui ###############################################
         last_test_iter = inf if cfg.SOLVER.TEST_ITER_RANGE[1] < 0 else cfg.SOLVER.TEST_ITER_RANGE[1]
-        if cfg.SOLVER.TEST_ITER > 0 and (iteration + 1) % cfg.SOLVER.TEST_ITER == 0\
+        if cfg.SOLVER.TEST_ITER > 0 and (iteration + 1) % cfg.SOLVER.TEST_ITER == 0 \
                 and cfg.SOLVER.TEST_ITER_RANGE[0] <= (iteration + 1) <= last_test_iter:
             test_func(cfg, model, distributed)
             model.train()
@@ -129,6 +134,7 @@ def do_train(
     if cfg.TEST_FINAL_ITER:
         test_func(cfg, model, distributed)
         evaluate_more(cfg)
+
 
 # ################################################## add by hui ###############################################
 
