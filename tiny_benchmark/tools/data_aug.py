@@ -1,14 +1,10 @@
 import json
-import random
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from pycocotools.coco import COCO
-from PIL import Image
-import pylab
 import math
 import os
+
+import numpy as np
+from PIL import Image
+from pycocotools.coco import COCO
 
 data_dir = "../dataset/tiny_set/erase_with_uncertain_dataset"
 train_file = f'{data_dir}/annotations/corner/task/tiny_set_train_sw640_sh512_all.json'
@@ -145,4 +141,5 @@ def augment():
 
 
 if __name__ == "__main__":
+    # gen_ann_file() # this step is to generate annotation file that ignores tiny1,2 and only keeps tiny3 and others
     augment()
