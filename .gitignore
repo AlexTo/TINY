@@ -5,6 +5,7 @@ dataset/cityscapes
 dataset/tiny_set
 dataset/coco
 dataset/visdrone
+dataset/vis_person
 tiny_benchmark/maskrcnn_benchmark.egg-info/
 tiny_benchmark/outputs/
 tiny_benchamrk/log/

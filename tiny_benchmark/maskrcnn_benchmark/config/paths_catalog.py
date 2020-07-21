@@ -194,6 +194,12 @@ class DatasetCatalog(object):
             "img_dir": "cityscapes/tiny/leftImg8bit_trainvaltest/leftImg8bit/val",
             "ann_file": "cityscapes/tiny/perdestrian_annotations/citypersons_all_val.json"
         },
+        # vis_person
+        "vis_person_set_corner_sw640_sh512_train_coco": {
+            'img_dir': 'vis_person',
+            'ann_file': 'vis_person/vis_person_set_train_sw640_sh512.json'
+        },
+
         # tinyperson
         "tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco": {
             'img_dir': 'tiny_set/erase_with_uncertain_dataset/train',
