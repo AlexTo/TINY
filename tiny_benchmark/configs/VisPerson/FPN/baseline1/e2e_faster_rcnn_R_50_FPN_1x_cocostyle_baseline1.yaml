@@ -4,8 +4,8 @@ MODEL:
   #WEIGHT: '../models/model_only_e2e_faster_rcnn_R_50_FPN_1x.pth'
   BACKBONE:
     CONV_BODY: "R-50-FPN"
-#    RESNET_STAGE_FIRST_STRIDE: (1, 2, 2, 2)
-#    REMOVE_STEM_POOL: true
+  #    RESNET_STAGE_FIRST_STRIDE: (1, 2, 2, 2)
+  #    REMOVE_STEM_POOL: true
   RESNETS:
     BACKBONE_OUT_CHANNELS: 256
   RPN:
@@ -37,13 +37,14 @@ DATALOADER:
   SIZE_DIVISIBILITY: 32
 
 # 2 gpus, base 4
+# total images: 20135
 SOLVER:
-  CHECKPOINT_PERIOD: 3206   # 2 epoch
-  TEST_ITER: 1603   # 1 epoch
+  CHECKPOINT_PERIOD: 10067   # 2 epoch
+  TEST_ITER: 10067   # 1 epoch
   BASE_LR: 0.01
   WEIGHT_DECAY: 0.0001
-  STEPS: (9618, 16030)   # (6 epoch, 10 epoch)  19236, 25648
-  MAX_ITER: 19236 # 12 epoch
+  STEPS: (60405, 100670)   # (6 epoch, 10 epoch)  19236, 25648
+  MAX_ITER: 120810 # 12 epoch
   IMS_PER_BATCH: 2
   NUM_GPU: 1
 TEST:
