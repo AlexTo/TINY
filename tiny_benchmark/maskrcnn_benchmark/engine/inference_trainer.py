@@ -69,7 +69,7 @@ def do_train(
 
         loss_dict = model(images, targets)
 
-        losses = sum(loss for loss in loss_dict.values())
+        losses = sum(loss_dict[loss_key] * cfg['MODEL']['LOSS_WEIGHT'].get(loss_key.upper(), 1.0) for loss_key in loss_dict.keys())
 
         # reduce losses over all GPUs for logging purposes
         loss_dict_reduced = reduce_loss_dict(loss_dict)

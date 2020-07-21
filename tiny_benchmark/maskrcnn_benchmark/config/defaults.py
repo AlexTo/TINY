@@ -40,6 +40,13 @@ _C.MODEL.WEIGHT = ""
 # add by hui, to ignore some key when load pre-tra
 _C.MODEL.IGNORE_WEIGHT_KEYS = []
 
+# add by HN
+_C.MODEL.LOSS_WEIGHT = CN()
+_C.MODEL.LOSS_WEIGHT.LOSS_CLASSIFIER = 1.0
+_C.MODEL.LOSS_WEIGHT.LOSS_BOX_REG = 1.0
+_C.MODEL.LOSS_WEIGHT.LOSS_OBJECTNESS = 1.0
+_C.MODEL.LOSS_WEIGHT.LOSS_RPN_BOX_REG = 1.0
+
 # -----------------------------------------------------------------------------
 # INPUT
 # -----------------------------------------------------------------------------
