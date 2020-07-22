@@ -31,31 +31,28 @@ INPUT:
   USE_SCALE: true
   SCALES: (1,)
 DATASETS:
-  TRAIN: ("vis_drone_corner_sw640_sh512_train_coco",)
+  TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco",)
   TEST: ("tiny_set_corner_sw640_sh512_test_all_coco",)
-  #TEST: ("vis_drone_corner_sw640_sh512_test_coco",)
-  
 DATALOADER:
   SIZE_DIVISIBILITY: 32
 
 # 2 gpus, base 4
 SOLVER:
-  CHECKPOINT_PERIOD: 1603   # 2 epoch
-  TEST_ITER: 19236   # 1 epoch
+  CHECKPOINT_PERIOD: 4008   # 10 epoch
+  TEST_ITER: 4008   # 10 epoch
   BASE_LR: 0.01
   WEIGHT_DECAY: 0.0001
-  STEPS: (9618, 16030)   # (6 epoch, 10 epoch)  19236, 25648
-  MAX_ITER: 19236 # 12 epoch
-  IMS_PER_BATCH: 4
+  STEPS: (2405, 3206)   # (6 epoch, 10 epoch)  19236, 25648
+  MAX_ITER: 4008 # 10 epoch
+  IMS_PER_BATCH: 8
   NUM_GPU: 4
 TEST:
-  IMS_PER_BATCH: 4
+  IMS_PER_BATCH: 8
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change
   MERGE_RESULTS: true
-  #MERGE_GT_FILE: '../dataset/visdrone/annotations/visdrone_test_sw640_sh512.json'
   MERGE_GT_FILE: '../dataset/tiny_set/erase_with_uncertain_dataset/annotations/tiny_set_test_nobox.json'
   IGNORE_UNCERTAIN: true
   USE_IOD_FOR_IGNORE: true
 #  DEBUG:
 #    USE_LAST_PREDICTION: True
-OUTPUT_DIR: ./outputs/visdrone/FPN/baseline1
+OUTPUT_DIR: ./outputs/tiny_set/FPN/R50_4u_10e_8b

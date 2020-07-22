@@ -1,9 +1,9 @@
 MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
-  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-101"
   #WEIGHT: '../models/model_only_e2e_faster_rcnn_R_50_FPN_1x.pth'
   BACKBONE:
-    CONV_BODY: "R-50-FPN"
+    CONV_BODY: "R-101-FPN"
   #    RESNET_STAGE_FIRST_STRIDE: (1, 2, 2, 2)
   #    REMOVE_STEM_POOL: true
   RESNETS:
@@ -31,17 +31,15 @@ INPUT:
   USE_SCALE: true
   SCALES: (1,)
 DATASETS:
-  TRAIN: ("vis_drone_corner_sw640_sh512_train_coco",)
+  TRAIN: ("tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco",)
   TEST: ("tiny_set_corner_sw640_sh512_test_all_coco",)
-  #TEST: ("vis_drone_corner_sw640_sh512_test_coco",)
-  
 DATALOADER:
   SIZE_DIVISIBILITY: 32
 
 # 2 gpus, base 4
 SOLVER:
-  CHECKPOINT_PERIOD: 1603   # 2 epoch
-  TEST_ITER: 19236   # 1 epoch
+  CHECKPOINT_PERIOD: 9618   # 6 epoch
+  TEST_ITER: 19236   # 12 epoch
   BASE_LR: 0.01
   WEIGHT_DECAY: 0.0001
   STEPS: (9618, 16030)   # (6 epoch, 10 epoch)  19236, 25648
@@ -52,10 +50,9 @@ TEST:
   IMS_PER_BATCH: 4
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change
   MERGE_RESULTS: true
-  #MERGE_GT_FILE: '../dataset/visdrone/annotations/visdrone_test_sw640_sh512.json'
   MERGE_GT_FILE: '../dataset/tiny_set/erase_with_uncertain_dataset/annotations/tiny_set_test_nobox.json'
   IGNORE_UNCERTAIN: true
   USE_IOD_FOR_IGNORE: true
 #  DEBUG:
 #    USE_LAST_PREDICTION: True
-OUTPUT_DIR: ./outputs/visdrone/FPN/baseline1
+OUTPUT_DIR: ./outputs/tiny_set/FPN/R101_V1

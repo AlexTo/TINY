@@ -10,7 +10,7 @@ MODEL:
     BACKBONE_OUT_CHANNELS: 256
   RETINANET:
     NUM_CLASSES: 2
-    ANCHOR_SIZES: (8, 16, 32, 64, 128)  # (4, 8, 16, 32, 64) will be better
+    ANCHOR_SIZES: (8.31, 12.5, 18.55, 30.23, 60.41)# (8, 16, 32, 64, 128)  # (4, 8, 16, 32, 64) will be better
     ASPECT_RATIOS: (0.5, 1., 2)
     ANCHOR_STRIDES: (4, 8, 16, 32, 64)
     PRE_NMS_TOP_N: 1000
@@ -28,25 +28,23 @@ INPUT:
 DATALOADER:
   SIZE_DIVISIBILITY: 32
 
-# 1 gpu
 SOLVER:
-  CHECKPOINT_PERIOD: 19236   # 2 epoch
-  TEST_ITER: 19236   # 1 epoch
-  BASE_LR: 0.005
-#  HEAD_LR_FACTOR: 10.
+  CHECKPOINT_PERIOD: 9618   # 6 epoch
+  TEST_ITER: 9618   # 12 epoch
+  BASE_LR: 0.01
   WEIGHT_DECAY: 0.0001
-  STEPS: (9618, 16030)   # (6 epoch, 10 epoch)
-  MAX_ITER: 19236 # 12 epoch
-  IMS_PER_BATCH: 2
-  NUM_GPU: 2
+  STEPS: (4809, 8015)   # (6 epoch, 10 epoch)  19236, 25648
+  MAX_ITER: 9618 # 12 epoch
+  IMS_PER_BATCH: 4
+  NUM_GPU: 4
 TEST:
-  IMS_PER_BATCH: 2
+  IMS_PER_BATCH: 4
   COCO_EVALUATE_STANDARD: 'tiny'  # tiny need change
   MERGE_RESULTS: true
-  MERGE_GT_FILE: '/home/hui/dataset/tiny_set/annotations/task/tiny_set_test_all.json'
+  MERGE_GT_FILE: '../dataset/tiny_set/erase_with_uncertain_dataset/annotations/tiny_set_test_nobox.json'
   IGNORE_UNCERTAIN: true
   USE_IOD_FOR_IGNORE: true
-OUTPUT_DIR: ./outputs/tiny_set/retina/baseline1_lrfpn_4u
+OUTPUT_DIR: ./outputs/tiny_set/retina/50_FPN_1x_4u
 TEST_FINAL_ITER: False
 NEPTUNE:
   USE_NEPTUNE: True

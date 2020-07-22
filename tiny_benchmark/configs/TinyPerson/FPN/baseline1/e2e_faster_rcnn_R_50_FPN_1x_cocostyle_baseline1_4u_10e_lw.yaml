@@ -3,8 +3,8 @@ MODEL:
   WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
   #WEIGHT: '../models/model_only_e2e_faster_rcnn_R_50_FPN_1x.pth'
   LOSS_WEIGHT:
-    LOSS_CLASSIFIER: 0.6
-    LOSS_BOX_REG: 1.0
+    LOSS_CLASSIFIER: 0.8
+    LOSS_BOX_REG: 0.6
     LOSS_OBJECTNESS: 0.8
     LOSS_RPN_BOX_REG: 1.0
   BACKBONE:
@@ -60,7 +60,7 @@ TEST:
   USE_IOD_FOR_IGNORE: true
 #  DEBUG:
 #    USE_LAST_PREDICTION: True
-OUTPUT_DIR: ./outputs/tiny_set/FPN/R50_4u_10e_lw_5
+OUTPUT_DIR: ./outputs/tiny_set/FPN/R50_4u_10e_lw_6
 TEST_FINAL_ITER: False
 NEPTUNE:
   USE_NEPTUNE: True
