@@ -60,5 +60,10 @@ TEST:
   USE_IOD_FOR_IGNORE: true
 #  DEBUG:
 #    USE_LAST_PREDICTION: True
+OUTPUT_DIR: ./outputs/tiny_set/FPN/R50_4u_10e_lw_5
 TEST_FINAL_ITER: False
-OUTPUT_DIR: ./outputs/tiny_set/FPN/R50_4u_10e_lw_3
+NEPTUNE:
+  USE_NEPTUNE: True
+  PROJECT: beufollow/tiny
+  API_TOKEN: eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vdWkubmVwdHVuZS5haSIsImFwaV91cmwiOiJodHRwczovL3VpLm5lcHR1bmUuYWkiLCJhcGlfa2V5IjoiY2UyZDg0ZDYtNWRjOS00NTc5LTkxZWMtZTYzZDY5NGQzMDkyIn0=
+

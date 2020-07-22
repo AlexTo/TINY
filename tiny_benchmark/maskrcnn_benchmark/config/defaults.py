@@ -663,3 +663,9 @@ _C.PATHS_CATALOG = os.path.join(os.path.dirname(__file__), "paths_catalog.py")
 
 _C.FIXED_SEED = -1  # init seed should >= 0, if < 0 means not use Fixed seed
 _C.TEST_FINAL_ITER = True
+
+_C.NEPTUNE = CN()
+_C.NEPTUNE.USE_NEPTUNE = False
+_C.NEPTUNE.PROJECT = ""
+_C.NEPTUNE.API_TOKEN = ""
+_C.NEPTUNE.MAX_SIZE = 20971520 # 20MB

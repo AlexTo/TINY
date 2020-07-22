@@ -10,6 +10,11 @@ from maskrcnn_benchmark.utils.comm import get_world_size
 from maskrcnn_benchmark.utils.metric_logger import MetricLogger
 from math import inf
 
+import neptune
+import os.path
+import json
+import tempfile
+import zipfile
 
 def reduce_loss_dict(loss_dict):
     """
@@ -105,6 +110,15 @@ def do_train(
                     memory=torch.cuda.max_memory_allocated() / 1024.0 / 1024.0,
                 )
             )
+
+            if cfg["NEPTUNE"]["USE_NEPTUNE"] and dist.get_rank() == 0:
+                try:
+                    neptune.send_metric("it", iteration)
+                    for name, meter in meters.meters.items():
+                        neptune.send_metric(name, meter.median)
+                except:
+                    pass
+
         if iteration % checkpoint_period == 0:
             checkpointer.save("model_{:07d}".format(iteration), **arguments)
         if iteration == max_iter:
@@ -115,7 +129,7 @@ def do_train(
                 and cfg.SOLVER.TEST_ITER_RANGE[0] <= (iteration + 1) <= last_test_iter:
             test_func(cfg, model, distributed)
             model.train()
-            evaluate_more(cfg)
+            evaluate_more(cfg, iteration)
         ###############################################################################################################
 
     total_training_time = time.time() - start_training_time
@@ -128,12 +142,12 @@ def do_train(
 
     if cfg.TEST_FINAL_ITER:
         test_func(cfg, model, distributed)
-        evaluate_more(cfg)
+        evaluate_more(cfg, iteration)
 
 # ################################################## add by hui ###############################################
 
 
-def evaluate_more(cfg):
+def evaluate_more(cfg, it=0):
     print(cfg.DATASETS.TEST)
     for dataset_name in cfg.DATASETS.TEST:
         from third.Cityscapes.cityperson_eval import cityperson_eval
@@ -169,6 +183,25 @@ def evaluate_more(cfg):
                         assert cfg.TEST.MERGE_RESULTS
                     else:
                         assert False
+            
+            if cfg["NEPTUNE"]["USE_NEPTUNE"] and dist.get_rank() == 0:
+                try:
+                    if os.path.getsize(det_file_path) < cfg["NEPTUNE"]["MAX_SIZE"]:
+                        with tempfile.SpooledTemporaryFile() as tmp:
+                            with zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as archive:
+                                archive.write(det_file_path, "{}_{}".format(it, os.path.basename(det_file_path)))
+                            tmp.seek(0)
+                            neptune.send_artifact(tmp, "{}.zip".format(it))
+                except:
+                    pass
+
+                try:
+                    with open(det_file_path) as json_file:
+                        data = json.load(json_file)
+                        neptune.send_metric("bbox", len(data))
+                except:
+                    pass
+            
             cityperson_eval(det_file_path, gt_file_path, CUT_WH=CUT_WH, ignore_uncertain=cfg.TEST.IGNORE_UNCERTAIN,
                             use_iod_for_ignore=cfg.TEST.USE_IOD_FOR_IGNORE, use_citypersons_standard=False)
         elif 'pedestrian' in dataset_name:

@@ -222,6 +222,12 @@ def main():
     if output_dir:
         mkdir(output_dir)
 
+    if cfg["NEPTUNE"]["USE_NEPTUNE"] and get_rank() == 0:
+        import neptune
+        neptune.init(cfg["NEPTUNE"]["PROJECT"], cfg["NEPTUNE"]["API_TOKEN"])
+        neptune.create_experiment(name=os.path.basename(args.config_file), params=cfg)
+        neptune.send_artifact(args.config_file, "config.yaml")
+    
     logger = setup_logger("maskrcnn_benchmark", output_dir, get_rank())
     logger.info("Using {} GPUs".format(num_gpus))
     logger.info(args)
