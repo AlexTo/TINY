@@ -210,6 +210,11 @@ class DatasetCatalog(object):
             'img_dir': 'tiny_set/erase_with_uncertain_dataset/train',
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all.json'
         },
+        # tinyperson
+        "tiny_set_corner_sw640_sh512_erase_with_uncertain_train_all_coco_2x": {
+            'img_dir': 'tiny_set/erase_with_uncertain_dataset/train_2x',
+            'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all_2x.json'
+        },
         "tiny_set_corner_sw640_sh512_erase_with_uncertain_train_augmented_coco": {
             'img_dir': 'tiny_set/erase_with_uncertain_dataset/train_augmented',
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all_augmented.json'
@@ -235,6 +240,7 @@ class DatasetCatalog(object):
             'img_dir': 'tiny_set/train',
             'ann_file': 'tiny_set/erase_with_uncertain_dataset/annotations/corner/task/tiny_set_train_sw640_sh512_all.json'
         },
+
         # big cut
         "tiny_set_corner_sw1920_sh1080_erase_with_uncertain_train_all_coco": {
             'img_dir': 'tiny_set/erase_with_uncertain_dataset/train',
@@ -254,7 +260,10 @@ class DatasetCatalog(object):
             'img_dir': 'tiny_set/test',
             'ann_file': 'tiny_set/annotations/corner/task/tiny_set_test_sw640_sh512_all.json'
         },
-
+        "tiny_set_corner_sw640_sh512_test_all_coco_2x": {
+            'img_dir': 'tiny_set/test_2x',
+            'ann_file': 'tiny_set/annotations/corner/task/tiny_set_test_sw640_sh512_all_2x.json'
+        },
         # visdrone
         "vis_drone_corner_sw640_sh512_train_coco": {
             'img_dir': 'visdrone/images/train',
