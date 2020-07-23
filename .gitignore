@@ -1,11 +1,7 @@
 cocoapi
 pretrained_model/
 params/COCOPretrain
-dataset/cityscapes
-dataset/tiny_set
-dataset/coco
-dataset/visdrone
-dataset/vis_person
+dataset
 tiny_benchmark/maskrcnn_benchmark.egg-info/
 tiny_benchmark/outputs/
 tiny_benchamrk/log/
@@ -30,3 +26,4 @@ tiny_benchmark/sds/log2/
 models
 results.txt
 ignore_*
+log_file

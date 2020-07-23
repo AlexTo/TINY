@@ -11,3 +11,4 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 -
 | AP50_tiny  | AP50_tiny1  | AP50_tiny2  | AP50_tiny3  | AP25_tiny  | AP75_tiny | mr50_tiny  |
 |------------|-------------|-------------|-------------|------------|-----------|------------|
 | 45.73 (25) | 27.99 (24)  | 49.41 (24)  | 57.78 (24)  | 67.93 (25) | 4.89 (25) | 88.18 (25) |
+
